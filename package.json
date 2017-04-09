@@ -1,5 +1,5 @@
 {
-  "name": "molgenis-i18n",
+  "name": "@molgenis/molgenis-i18n-js",
   "description": "A Vue.js plugin for the internationalization of MOLGENIS Vue applications",
   "version": "0.0.3",
   "author": {
