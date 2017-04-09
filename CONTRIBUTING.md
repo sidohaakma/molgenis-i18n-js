@@ -45,12 +45,12 @@
   - Add appropriate test coverage if applicable.
 
 ### Work Step Example
-- Fork the repository from [fdlk/molgenis-i18n-js](https://github.com/fdlk/molgenis-i18n-js) !
+- Fork the repository from [molgenis/molgenis-i18n-js](https://github.com/molgenis/molgenis-i18n-js) !
 - Create your topic branch from `master`: `git branch my-new-topic origin/master`
 - Add codes and pass tests !
 - Commit your changes: `git commit -am 'Add some topic'`
 - Push to the branch: `git push origin my-new-topic`
-- Submit a pull request to `master` branch of `fdlk/molgenis-i18n-js` repository !
+- Submit a pull request to `master` branch of `molgenis/molgenis-i18n-js` repository !
 
 ## Development Setup
 
