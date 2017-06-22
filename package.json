@@ -1,7 +1,7 @@
 {
   "name": "@molgenis/molgenis-i18n-js",
   "description": "A Vue.js plugin for the internationalization of MOLGENIS Vue applications",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "author": {
     "name": "Genomics Coordination Center",
     "email": "gcc-apps-team@googlegroups.com"
@@ -55,12 +55,6 @@
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.1"
   },
-  "files": [
-    "dist/molgenis-i18n-js.js",
-    "dist/molgenis-i18n-js.min.js",
-    "dist/molgenis-i18n-js.common.js",
-    "src"
-  ],
   "homepage": "https://github.com/molgenis/molgenis-i18n-js#readme",
   "main": "dist/molgenis-i18n-js.common.js",
   "module": "dist/molgenis-i18n-js.esm.js",
