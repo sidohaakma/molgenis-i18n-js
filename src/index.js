@@ -15,7 +15,7 @@ import 'moment/locale/de'
  *
  * @param Vue the Vue class
  * @param options the options to use
- * @param options.namespace the namespace for this application
+ * @param options.namespace the namespace (or array of namespaces) for this application
  * @param options.lng the user's language
  * @param options.fallbackLng the fallback languages to use
  * @param options.callback callback function to call once languages are available
@@ -23,7 +23,7 @@ import 'moment/locale/de'
  * @see https://github.com/icebob/vue-express-mongo-boilerplate/blob/master/client/app/core/i18next.js
  */
 function plugin (Vue: any, options: {
-  namespace: string,
+  namespace: string|Array<string>,
   lng: string,
   fallbackLng?: string|Array<string>,
   callback?: () => void
@@ -48,8 +48,8 @@ function plugin (Vue: any, options: {
   const i18nOptions = {
     lng,
     fallbackLng,
-    ns: [namespace],
-    defaultNS: namespace,
+    ns: Array.isArray(namespace) ? namespace : [namespace],
+    defaultNS: Array.isArray(namespace) ? namespace[0] : namespace,
     load: 'languageOnly',
     saveMissing: true,
     saveMissingTo: 'current',
@@ -78,4 +78,3 @@ function plugin (Vue: any, options: {
 plugin.version = '__VERSION__'
 
 export default plugin
-

@@ -50,8 +50,8 @@ function plugin (Vue, options) {
   var i18nOptions = {
     lng: lng,
     fallbackLng: fallbackLng,
-    ns: [namespace],
-    defaultNS: namespace,
+    ns: Array.isArray(namespace) ? namespace : [namespace],
+    defaultNS: Array.isArray(namespace) ? namespace[0] : namespace,
     load: 'languageOnly',
     saveMissing: true,
     saveMissingTo: 'current',
