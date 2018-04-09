@@ -76,7 +76,8 @@ describe('MOLGENIS Vue i18n plugin', () => {
       LocalVue.use(Plugin, {
         lng: 'nl',
         fallbackLng: ['de', 'en'],
-        namespace: 'test'
+        namespace: 'test',
+        callback: () => {}
       })
       vm = new LocalVue()
       Vue.nextTick(() => {
