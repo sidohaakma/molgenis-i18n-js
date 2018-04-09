@@ -69,32 +69,35 @@ describe('MOLGENIS Vue i18n plugin', () => {
   })
 
   describe('Vue prototype', () => {
-    it('should add language to Vue.$lng', done => {
+    let vm
+
+    before(function (done) {
       const LocalVue = createLocalVue()
-      const vm = new LocalVue()
+      LocalVue.use(Plugin, {
+        lng: 'nl',
+        fallbackLng: ['de', 'en'],
+        namespace: 'test'
+      })
+      vm = new LocalVue()
+      Vue.nextTick(() => {
+        done()
+      })
+    })
+
+    it('should add language to Vue.$lng', () => {
       expect(vm.$lng).to.equal('nl', 'Language should be set to lng parameter')
-      done()
     })
 
-    it('should add translation function to Vue._', done => {
-      const LocalVue = createLocalVue()
-      const vm = new LocalVue()
+    it('should add translation function to Vue._', () => {
       expect(vm._('tokenNL')).to.equal('token nl')
-      done()
     })
 
-    it('should add translation function to Vue.$t', done => {
-      const LocalVue = createLocalVue()
-      const vm = new LocalVue()
+    it('should add translation function to Vue.$t', () => {
       expect(vm.$t('tokenNL')).to.equal('token nl')
-      done()
     })
 
-    it('should add i18next to Vue.$i18n', done => {
-      const LocalVue = createLocalVue()
-      const vm = new LocalVue()
+    it('should add i18next to Vue.$i18n', () => {
       expect(vm.$i18n).to.equal(i18next)
-      done()
     })
   })
 
@@ -105,7 +108,7 @@ describe('MOLGENIS Vue i18n plugin', () => {
     })
 
     it('should set i18next languages to lng plus the languages in fallbackLng', done => {
-      expect.deepEqual(i18next.languages, ['nl', 'de', 'en'])
+      expect(i18next.languages).to.deep.equal(['nl', 'de', 'en'])
       done()
     })
 
@@ -135,7 +138,8 @@ describe('MOLGENIS Vue i18n plugin', () => {
       }).$mount()
       Vue.nextTick(() => {
         expect(vm.$el.textContent).to.equal('donderdag 5 december 2019 21:12')
-      }).then(done)
+        done()
+      })
     })
   })
 
@@ -147,7 +151,8 @@ describe('MOLGENIS Vue i18n plugin', () => {
       }).$mount()
       Vue.nextTick(() => {
         expect(vm.$el.textContent).to.equal('token nl')
-      }).then(done)
+        done()
+      })
     })
 
     it('should have $t function', done => {
@@ -157,7 +162,8 @@ describe('MOLGENIS Vue i18n plugin', () => {
       }).$mount()
       Vue.nextTick(() => {
         expect(vm.$el.textContent).to.equal('token nl')
-      }).then(done)
+        done()
+      })
     })
   })
 })
