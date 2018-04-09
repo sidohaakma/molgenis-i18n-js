@@ -47,25 +47,17 @@ module.exports = {
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
     before(app) {
-      app.get('/api/v2/i18n/form/en', function (req, res) {
+      app.get('/api/v2/i18n/demo/en', function (req, res) {
         const localizedMessages = {
-          'form_validation_failed': 'Validation failed',
-          'form_not_a_valid_number': 'Not a valid number',
-          'form_not_a_valid_url': 'Not a valid URL',
-          'form_not_a_valid_email': 'Not a valid email',
-          'form_not_within_range': 'Value is outside of range',
-          'form_below_min_value': 'Value is below allowed value',
-          'form_above_max_value': 'Value is above allowed value',
-          'form_bool_true': 'True',
-          'form_bool_false': 'False',
-          'form_bool_missing': 'N/A'
+          'hallo_label': 'Good day',
+          'good_by_label': 'By By',
         }
         res.json(localizedMessages)
       })
 
-      app.get('/api/v2/i18n/demo/en', function (req, res) {
+      app.get('/api/v2/i18n/other/en', function (req, res) {
         const localizedMessages = {
-          'form_required_field': 'This field is required',
+          'turtle_label': 'I like turtles',
         }
         res.json(localizedMessages)
       })

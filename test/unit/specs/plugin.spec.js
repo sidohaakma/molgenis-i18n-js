@@ -1,5 +1,5 @@
 import i18next from 'i18next'
-import Plugin from '../../../src/index'
+import Plugin from '../../../src/plugin'
 import sinon from 'sinon'
 import Vue from 'vue'
 import { createLocalVue } from '@vue/test-utils'

@@ -1,13 +1,22 @@
 /* @flow */
 
+// $FlowFixMe
 import i18next from 'i18next'
+// $FlowFixMe
 import XHR from 'i18next-xhr-backend'
+// $FlowFixMe
 import moment from 'moment'
+// $FlowFixMe
 import 'moment/locale/pt'
+// $FlowFixMe
 import 'moment/locale/es'
+// $FlowFixMe
 import 'moment/locale/it'
+// $FlowFixMe
 import 'moment/locale/fr'
+// $FlowFixMe
 import 'moment/locale/nl'
+// $FlowFixMe
 import 'moment/locale/de'
 
 /**
