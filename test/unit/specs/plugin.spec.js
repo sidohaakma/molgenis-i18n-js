@@ -128,42 +128,80 @@ describe('MOLGENIS Vue i18n plugin', () => {
   })
 
   describe('moment filter', () => {
-    it('should format dates and times in the correct language', done => {
+    let vm
+
+    before(function (done) {
       const LocalVue = createLocalVue()
-      const vm = new LocalVue({
+      LocalVue.use(Plugin, {
+        lng: 'nl',
+        fallbackLng: ['de', 'en'],
+        namespace: 'test'
+      })
+
+      vm = new LocalVue({
         template: '<div>{{ date | moment(\'LLLL\') }}</div>',
         data: {
           date: Date.UTC(2019, 11, 5, 20, 12, 2)
         }
       }).$mount()
+
       Vue.nextTick(() => {
-        expect(vm.$el.textContent).to.equal('donderdag 5 december 2019 21:12')
         done()
       })
+    })
+
+    it('should format dates and times in the correct language', () => {
+      expect(vm.$el.textContent).to.equal('donderdag 5 december 2019 21:12')
     })
   })
 
-  describe('i18n in templates', () => {
-    it('should have i18n filter', done => {
+  describe('i18n in templates as template filter', () => {
+    let vm
+
+    before(function (done) {
       const LocalVue = createLocalVue()
-      const vm = new LocalVue({
+      LocalVue.use(Plugin, {
+        lng: 'nl',
+        fallbackLng: ['de', 'en'],
+        namespace: 'test'
+      })
+
+      vm = new LocalVue({
         template: '<div>{{ \'tokenNL\' | i18n }}</div>'
       }).$mount()
+
       Vue.nextTick(() => {
-        expect(vm.$el.textContent).to.equal('token nl')
         done()
       })
     })
 
-    it('should have $t function', done => {
+    it('should have i18n filter', () => {
+      expect(vm.$el.textContent).to.equal('token nl')
+    })
+  })
+
+  describe('i18n in templates as script filter', () => {
+    let vm
+
+    before(function (done) {
       const LocalVue = createLocalVue()
-      const vm = new LocalVue({
+      LocalVue.use(Plugin, {
+        lng: 'nl',
+        fallbackLng: ['de', 'en'],
+        namespace: 'test'
+      })
+
+      vm = new LocalVue({
         template: '<div>{{ $t(\'tokenNL\') }}</div>'
       }).$mount()
+
       Vue.nextTick(() => {
-        expect(vm.$el.textContent).to.equal('token nl')
         done()
       })
+    })
+
+    it('should have $t function', () => {
+      expect(vm.$el.textContent).to.equal('token nl')
     })
   })
 })
