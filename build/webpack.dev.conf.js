@@ -8,12 +8,27 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin')
+const vueLoaderConfig = require('./vue-loader.conf')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
-  module: {},
+  module: {
+    rules: [
+      ...(config.dev.useEslint ? [utils.createLintingRule()] : []),
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: vueLoaderConfig
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        include: [utils.resolve('src'), utils.resolve('test')]
+      }
+    ]
+  },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
 

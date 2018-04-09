@@ -7,9 +7,7 @@
     "name": "Genomics Coordination Center",
     "email": "gcc-apps-team@googlegroups.com"
   },
-  "main": "dist/molgenis-i18n-js.common.js",
-  "module": "dist/molgenis-i18n-js.esm.js",
-  "unpkg": "dist/molgenis-i18n-js.js",
+  "main": "dist/molgenis-i18n-js.js",
   "keywords": [
     "plugin",
     "vue",
@@ -44,7 +42,7 @@
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
-    "babel-loader": "^7.1.1",
+    "babel-loader": "^7.1.4",
     "babel-plugin-istanbul": "^4.1.1",
     "babel-plugin-syntax-jsx": "^6.18.0",
     "babel-plugin-transform-runtime": "^6.22.0",
@@ -99,6 +97,7 @@
     "portfinder": "^1.0.13",
     "postcss-import": "^11.0.0",
     "postcss-loader": "^2.0.8",
+    "raw-loader": "^0.5.1",
     "rimraf": "^2.6.0",
     "selenium-server": "^3.0.1",
     "semver": "^5.3.0",

@@ -28,3 +28,21 @@ exports.createNotifierCallback = () => {
     })
   }
 }
+
+const resolve =  (dir) => {
+  return path.join(__dirname, '..', dir)
+}
+
+exports.resolve = resolve
+
+exports.createLintingRule = () => ({
+  test: /\.(js|vue)$/,
+  loader: 'eslint-loader',
+  enforce: 'pre',
+  include: [resolve('src'), resolve('test')],
+  options: {
+    formatter: require('eslint-friendly-formatter'),
+    emitWarning: !config.dev.showEslintErrorsInOverlay
+  }
+})
+
