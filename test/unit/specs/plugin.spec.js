@@ -20,6 +20,18 @@ describe('MOLGENIS Vue i18n plugin', () => {
       en: {
         tokenEN: 'token en'
       }
+    },
+    other: {
+      nl: {
+        tokenNL: 'token nl'
+      },
+      de: {
+        tokenNL: 'token de',
+        tokenDE: 'token de'
+      },
+      en: {
+        tokenEN: 'token en'
+      }
     }
   }
 
@@ -61,7 +73,7 @@ describe('MOLGENIS Vue i18n plugin', () => {
         localVue.use(Plugin, {
           lng: 'nl',
           fallbackLng: ['de', 'en'],
-          namespace: 'test',
+          namespace: ['test', 'other'],
           callback: done
         })
       }
