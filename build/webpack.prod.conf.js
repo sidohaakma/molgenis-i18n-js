@@ -7,6 +7,7 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const FlowBabelWebpackPlugin = require('flow-babel-webpack-plugin')
+const vueLoaderConfig = require('./vue-loader.conf')
 
 const env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
@@ -18,9 +19,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       ...(config.dev.useEslint ? [utils.createLintingRule()] : []),
       {
         test: /\.js$/,
-        loader: 'raw-loader',
-        exclude: /node_modules/,
-        include: [utils.resolve('src'), utils.resolve('test')]
+        loader: 'babel-loader',
+        include: utils.resolve('src')
       }
     ]
   },
