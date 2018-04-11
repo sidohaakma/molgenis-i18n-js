@@ -3,6 +3,7 @@ import Plugin from '../../../src/plugin'
 import sinon from 'sinon'
 import Vue from 'vue'
 import { createLocalVue } from '@vue/test-utils'
+import moment from 'moment'
 
 describe('MOLGENIS Vue i18n plugin', () => {
   let xhr
@@ -142,11 +143,13 @@ describe('MOLGENIS Vue i18n plugin', () => {
 
   describe('moment filter', () => {
     let vm
+    const lng = 'nl'
+    const date = Date.UTC(2019, 11, 5, 20, 12, 2)
 
     before(function (done) {
       const LocalVue = createLocalVue()
       LocalVue.use(Plugin, {
-        lng: 'nl',
+        lng,
         fallbackLng: ['de', 'en'],
         namespace: 'test'
       })
@@ -154,7 +157,7 @@ describe('MOLGENIS Vue i18n plugin', () => {
       vm = new LocalVue({
         template: '<div>{{ date | moment(\'LLLL\') }}</div>',
         data: {
-          date: Date.UTC(2019, 11, 5, 20, 12, 2)
+          date
         }
       }).$mount()
 
@@ -164,7 +167,9 @@ describe('MOLGENIS Vue i18n plugin', () => {
     })
 
     it('should format dates and times in the correct language', () => {
-      expect(vm.$el.textContent).to.equal('donderdag 5 december 2019 21:12')
+      moment.locale(lng)
+      const expected = moment(date).format('LLLL')
+      expect(vm.$el.textContent).to.equal(expected)
     })
   })
 
