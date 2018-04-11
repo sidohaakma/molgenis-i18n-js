@@ -7,7 +7,7 @@
     "name": "Genomics Coordination Center",
     "email": "gcc-apps-team@googlegroups.com"
   },
-  "main": "dist/molgenis-i18n-js.js",
+  "main": "dist/molgenis-i18n-js.esm.js",
   "keywords": [
     "plugin",
     "vue",
@@ -99,6 +99,9 @@
     "postcss-loader": "^2.0.8",
     "raw-loader": "^0.5.1",
     "rimraf": "^2.6.0",
+    "rollup": "^0.57.1",
+    "rollup-plugin-flow-no-whitespace": "^1.0.0",
+    "rollup-plugin-replace": "^2.0.0",
     "selenium-server": "^3.0.1",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",

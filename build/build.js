@@ -1,37 +1,81 @@
-'use strict'
-require('./check-versions')()
-
-process.env.NODE_ENV = 'production'
-
-const ora = require('ora')
-const rm = require('rimraf')
+const fs = require('fs')
 const path = require('path')
-const chalk = require('chalk')
-const webpack = require('webpack')
-const config = require('../config')
-const webpackConfig = require('./webpack.prod.conf')
+const zlib = require('zlib')
+const uglify = require('uglify-js')
+const rollup = require('rollup')
+const configs = require('./entry')
 
-const spinner = ora('building for production...')
-spinner.start()
+if (!fs.existsSync('dist')) {
+  fs.mkdirSync('dist')
+}
 
-rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
-  if (err) throw err
-  webpack(webpackConfig, (err, stats) => {
-    spinner.stop()
-    if (err) throw err
-    process.stdout.write(stats.toString({
-      colors: true,
-      modules: false,
-      children: false, // if you are using ts-loader, setting this to true will make tyescript errors show up during build
-      chunks: false,
-      chunkModules: false
-    }) + '\n\n')
+build(Object.keys(configs).map(key => configs[key]))
 
-    if (stats.hasErrors()) {
-      console.log(chalk.red('  Build failed with errors.\n'))
-      process.exit(1)
+function build (builds) {
+  let built = 0
+  const total = builds.length
+  const next = () => {
+    buildEntry(builds[built]).then(() => {
+      built++
+      if (built < total) {
+        next()
+      }
+    }).catch(logError)
+  }
+
+  next()
+}
+
+function buildEntry ({ input, output }) {
+  const isProd = /min\.js$/.test(output.file)
+  return rollup.rollup(input)
+    .then(bundle => bundle.generate(output))
+    .then(({ code }) => {
+      if (isProd) {
+        var minified = uglify.minify(code, {
+          output: {
+            preamble: output.banner,
+            /* eslint-disable camelcase */
+            ascii_only: true
+            /* eslint-enable camelcase */
+          }
+        }).code
+        return write(output.file, minified, true)
+      } else {
+        return write(output.file, code)
+      }
+    })
+}
+
+function write (dest, code, zip) {
+  return new Promise((resolve, reject) => {
+    function report (extra) {
+      console.log(blue(path.relative(process.cwd(), dest)) + ' ' + getSize(code) + (extra || ''))
+      resolve()
     }
 
-    console.log(chalk.cyan('  Build complete.\n'))
+    fs.writeFile(dest, code, err => {
+      if (err) return reject(err)
+      if (zip) {
+        zlib.gzip(code, (err, zipped) => {
+          if (err) return reject(err)
+          report(' (gzipped: ' + getSize(zipped) + ')')
+        })
+      } else {
+        report()
+      }
+    })
   })
-})
+}
+
+function getSize (code) {
+  return (code.length / 1024).toFixed(2) + 'kb'
+}
+
+function logError (e) {
+  console.log(e)
+}
+
+function blue (str) {
+  return '\x1b[1m\x1b[34m' + str + '\x1b[39m\x1b[22m'
+}
