@@ -1,5 +1,5 @@
 [ignore]
-.*/node_modules/.*
+.*/node_modules/**/.*
 .*/docs/.*
 .*/test/.*
 .*/config/.*
@@ -8,6 +8,5 @@
 [include]
 
 [libs]
-decls
 
 [options]
