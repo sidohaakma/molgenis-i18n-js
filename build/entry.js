@@ -2,6 +2,7 @@ const path = require('path')
 const flow = require('rollup-plugin-flow-no-whitespace')
 const replace = require('rollup-plugin-replace')
 const pack = require('../package.json')
+const buble = require('rollup-plugin-buble')
 const version = pack.version
 const banner =
     `/*!
@@ -26,6 +27,7 @@ function genConfig (opts) {
       input: resolve('src/plugin.js'),
       plugins: [
         flow(),
+        buble(),
         replace({
           __VERSION__: version
         }),
