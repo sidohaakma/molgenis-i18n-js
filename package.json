@@ -1,7 +1,7 @@
 {
   "name": "@molgenis/molgenis-i18n-js",
   "description": "A Vue.js plugin for the internationalization of MOLGENIS Vue applications",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "homepage": "https://github.com/molgenis/molgenis-i18n-js#readme",
   "author": {
     "name": "Genomics Coordination Center",
