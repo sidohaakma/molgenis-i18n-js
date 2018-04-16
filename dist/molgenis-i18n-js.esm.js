@@ -30,26 +30,24 @@ import 'moment/locale/de';
  * @see https://github.com/icebob/vue-express-mongo-boilerplate/blob/master/client/app/core/i18next.js
  */
 function plugin (Vue, options) {
-  const {
-    namespace,
-    lng,
-    fallbackLng,
-    callback
-  } = options;
+  var namespace = options.namespace;
+  var lng = options.lng;
+  var fallbackLng = options.fallbackLng;
+  var callback = options.callback;
 
-  const t = (key, options) => i18next.t(key, options);
+  var t = function (key, options) { return i18next.t(key, options); };
 
   Vue.prototype.$lng = lng;
   Vue.prototype.$i18n = i18next;
   Vue.prototype.$t = t;
   Vue.prototype._ = t;
   Vue.filter('i18n', t);
-  Vue.filter('moment', (value, format) => moment(value).format(format));
+  Vue.filter('moment', function (value, format) { return moment(value).format(format); });
   moment.locale(lng);
 
-  const i18nOptions = {
-    lng,
-    fallbackLng,
+  var i18nOptions = {
+    lng: lng,
+    fallbackLng: fallbackLng,
     ns: Array.isArray(namespace) ? namespace : [namespace],
     defaultNS: Array.isArray(namespace) ? namespace[0] : namespace,
     load: 'languageOnly',
@@ -70,7 +68,7 @@ function plugin (Vue, options) {
     console.log('Initializing i18next...');
     i18next
       .use(XHR)
-      .init(i18nOptions, () => {
+      .init(i18nOptions, function () {
         console.log('I18Next initialized! Language: ' + i18next.language);
         callback && callback();
       });

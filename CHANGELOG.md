@@ -1,3 +1,8 @@
+<a name="0.1.1"></a>
+## 0.1.1 (2018-04-16)
+* Remove es6 syntax from production build 
+
+
 <a name="0.1.0"></a>
 ## 0.1.0 (2018-04-11)
 * Allow multiple namespaces, the default namespace is the first namespace in the list.
