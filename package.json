@@ -7,6 +7,10 @@
     "name": "Genomics Coordination Center",
     "email": "gcc-apps-team@googlegroups.com"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://registry.npmjs.org"
+  },
   "main": "dist/molgenis-i18n-js.esm.js",
   "keywords": [
     "plugin",
