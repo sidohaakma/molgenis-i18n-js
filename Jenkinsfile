@@ -39,7 +39,12 @@ pipeline {
         }
         stage('Install, test and build: [ master ]') {
             when {
-                branch 'master'
+                allOf {
+                    branch 'master'
+                    not { 
+                        changelog '.*\\[skip ci\\]$'
+                    }
+                }
             }
             steps {
                 milestone 1
@@ -84,15 +89,7 @@ pipeline {
             notifySuccess()
         }
         failure {
-            notifyFailed()
+            hubotSend(message: 'Build failed', status:'ERROR', site: 'slack-pr-app-team')
         }
     }
-}
-
-def notifySuccess() {
-    hubotSend(message: 'Build success', status:'INFO', site: 'slack-pr-app-team')
-}
-
-def notifyFailed() {
-    hubotSend(message: 'Build failed', status:'ERROR', site: 'slack-pr-app-team')
 }
