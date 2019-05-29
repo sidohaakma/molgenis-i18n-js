@@ -85,9 +85,6 @@ pipeline {
         }
     }
     post {
-        success {
-            notifySuccess()
-        }
         failure {
             hubotSend(message: 'Build failed', status:'ERROR', site: 'slack-pr-app-team')
         }
