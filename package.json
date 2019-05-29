@@ -2,10 +2,25 @@
   "name": "@molgenis/molgenis-i18n-js",
   "description": "A Vue.js plugin for the internationalization of MOLGENIS Vue applications",
   "version": "0.1.1",
-  "homepage": "https://github.com/molgenis/molgenis-i18n-js#readme",
+  "homepage": "https://github.com/molgenis/molgenis-js-i18n#readme",
   "author": {
     "name": "Genomics Coordination Center",
     "email": "gcc-apps-team@googlegroups.com"
+  },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [ "@semantic-release/changelog",
+          {"changelogFile": "CHANGELOG.md" } ],
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ]
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "http://registry.npmjs.org"
   },
   "main": "dist/molgenis-i18n-js.esm.js",
   "keywords": [
@@ -17,10 +32,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fdlk/molgenis-i18n-js.git"
+    "url": "git+https://github.com/fdlk/molgenis-js-i18n.git"
   },
   "bugs": {
-    "url": "https://github.com/molgenis/molgenis-i18n-js/issues"
+    "url": "https://github.com/molgenis/molgenis-js-i18n/issues"
   },
   "license": "LGPL-3.0",
   "scripts": {
@@ -29,7 +44,8 @@
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "preversion": "yarn install; yarn unit; yarn build"
   },
   "dependencies": {
     "i18next": "^7.1.3",
