@@ -7,6 +7,17 @@
     "name": "Genomics Coordination Center",
     "email": "gcc-apps-team@googlegroups.com"
   },
+  "release": {
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      [ "@semantic-release/changelog",
+          {"changelogFile": "CHANGELOG.md" } ],
+      "@semantic-release/npm",
+      "@semantic-release/git",
+      "@semantic-release/github"
+    ]
+  },
   "publishConfig": {
     "access": "public",
     "registry": "http://registry.npmjs.org"
