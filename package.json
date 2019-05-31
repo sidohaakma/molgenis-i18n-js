@@ -36,7 +36,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fdlk/molgenis-js-i18n.git"
+    "url": "git+https://github.com/molgenis/molgenis-js-i18n.git"
   },
   "bugs": {
     "url": "https://github.com/molgenis/molgenis-js-i18n/issues"
