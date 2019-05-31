@@ -11,8 +11,12 @@
     "plugins": [
       "@semantic-release/commit-analyzer",
       "@semantic-release/release-notes-generator",
-      [ "@semantic-release/changelog",
-          {"changelogFile": "CHANGELOG.md" } ],
+      [
+        "@semantic-release/changelog",
+        {
+          "changelogFile": "CHANGELOG.md"
+        }
+      ],
       "@semantic-release/npm",
       "@semantic-release/git",
       "@semantic-release/github"
@@ -53,6 +57,8 @@
     "moment": "^2.18.1"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^3.0.2",
+    "@semantic-release/git": "^7.0.8",
     "@vue/test-utils": "^1.0.0-beta.13",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
@@ -120,6 +126,7 @@
     "rollup-plugin-flow-no-whitespace": "^1.0.0",
     "rollup-plugin-replace": "^2.0.0",
     "selenium-server": "^3.0.1",
+    "semantic-release": "^15.13.12",
     "semver": "^5.3.0",
     "shelljs": "^0.7.6",
     "sinon": "^4.0.0",
